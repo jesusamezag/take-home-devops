@@ -94,3 +94,6 @@ export STATE_BUCKET_NAME=$(terragrunt output --terragrunt-working-dir "terraform
 ```bash
 terragrunt run-all apply --terragrunt-include-dir "**/${ENV}"
 ```
+
+### Cleanup
+To clean up the created resources, simply run the `make cleanup` command, which will handle the removal of all resources deployed in the selected environment. It's important to note that this will cause an error, as when the project is deleted, the bucket containing the remote state is also deleted. No action is needed to resolve this error as it doesn't affect the cleanup process. A possible solution to this is to create the bucket in the Bootstrap project.

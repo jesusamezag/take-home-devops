@@ -22,6 +22,7 @@ cleanup-dependencies:
 
 cleanup:
 	echo "cleaning up infrastructure..."
+	@terragrunt run-all destroy --terragrunt-include-dir "**/${ENV}"
 	@find . -type f -name "backend.tf" -exec rm -rf {} \+
 	@find . -type d -name ".terraform" -exec rm -rf {} \+
 	@find . -type f -name "errored.tfstate" -exec rm -rf {} \+
