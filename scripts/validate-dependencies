@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -eEuo pipefail
+
+DEP_TERRAFORM_CMD="$(command -v terraform || true)"
+DEP_TERRAGRUNT_CMD="$(command -v terragrunt || true)"
+
+function error() {
+  echo "🛑 ERROR: $1" >&2
+  exit 1
+}
+
+function validate_dependencies() {
+  if [ -z "${DEP_TERRAFORM_CMD}" ]; then
+    error "terraform is not installed."
+  fi
+  if [ -z "${DEP_TERRAGRUNT_CMD}" ]; then
+    error "terragrunt is not installed."
+  fi
+  echo "✅ dependencies validated..."
+}
+
+validate_dependencies

@@ -1,0 +1,18 @@
+# Editors and IDEs
+.vscode/
+.idea/
+
+# MacOS files
+.DS_Store
+._*
+
+# Terraform files
+**/.terraform*
+*.tfstate
+*.tfstate.*
+**/terraform.tfvars
+**/tmp_plan
+secrets.hcl
+
+# Node.js files
+node_modules/
