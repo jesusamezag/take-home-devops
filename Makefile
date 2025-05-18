@@ -11,7 +11,7 @@ bootstrap:
 	@terragrunt apply --terragrunt-working-dir "terraform/1-env/${ENV}"
 	@echo "initializing terraform state for environment: ${ENV}..."
 	@STATE_BUCKET_NAME=$$(terragrunt output --terragrunt-working-dir "terraform/1-env/${ENV}" -raw terraform_state_bucket_name) \
-		terragrunt init --terragrunt-working-dir "terraform/1-env/${ENV}"
+		terragrunt init -reconfigure --terragrunt-working-dir "terraform/1-env/${ENV}"
 	@echo "bootstrap complete"
 .PHONY: bootstrap
 
@@ -24,5 +24,7 @@ cleanup:
 	echo "cleaning up infrastructure..."
 	@find . -type f -name "backend.tf" -exec rm -rf {} \+
 	@find . -type d -name ".terraform" -exec rm -rf {} \+
+	@find . -type f -name "errored.tfstate" -exec rm -rf {} \+
+	@find . -type f -name "terraform.tfstate" -exec rm -rf {} \+
 	@echo "✅ infrastructure cleaned up..."
 .PHONY: cleanup
